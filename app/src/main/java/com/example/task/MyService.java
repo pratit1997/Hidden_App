@@ -5,15 +5,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.Chronometer;
 import android.widget.Toast;
 
 import static android.content.ContentValues.TAG;
 
 public class MyService extends AccessibilityService {
     int flag=0; int f=0;
+    int counter=0;
+
     @Override
     public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
     }
@@ -35,9 +41,14 @@ public class MyService extends AccessibilityService {
                 Toast.makeText(this, "KeyUp", Toast.LENGTH_SHORT).show();
             } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
                 Log.d(TAG, "onClick: "+flag);
-                audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
+
+//                audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FX_FOCUS_NAVIGATION_LEFT);
                 flag++;
+
                 if(flag==3) {
+
+
+//                    audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FX_FOCUS_NAVIGATION_LEFT);
                     Log.d(TAG, "onClick: "+flag);
                     PackageManager p = getPackageManager();
                     ComponentName componentName = new ComponentName(getApplicationContext(), MainActivity.class);
